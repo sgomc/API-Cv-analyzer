@@ -1,0 +1,90 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "personalDetails": {
+      "type": "OBJECT",
+      "properties": {
+        "fullName": { "type": "STRING" },
+        "email": { "type": "STRING" },
+        "phoneNumber": { "type": "STRING" },
+        "address": { "type": "STRING" },
+        "linkedin": { "type": "STRING" },
+        "portfolio": { "type": "STRING" }
+      }
+    },
+    "summary": {
+      "type": "STRING",
+      "description": "A professional summary or objective."
+    },
+    "experience": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "jobTitle": { "type": "STRING" },
+          "company": { "type": "STRING" },
+          "location": { "type": "STRING" },
+          "startDate": { "type": "STRING" },
+          "endDate": { "type": "STRING" },
+          "responsibilities": {
+            "type": "ARRAY",
+            "items": { "type": "STRING" }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "degree": { "type": "STRING" },
+          "institution": { "type": "STRING" },
+          "location": { "type": "STRING" },
+          "graduationDate": { "type": "STRING" },
+          "gpa": { "type": "STRING", "description": "The Grade Point Average, if listed (e.g., 3.8/4.0)." }
+        }
+      }
+    },
+    "projects": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "projectTitle": { "type": "STRING" },
+          "technologies": { "type": "STRING", "description": "A comma-separated string of technologies used." },
+          "link": { "type": "STRING" },
+          "description": {
+            "type": "ARRAY",
+            "items": { "type": "STRING" }
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "ARRAY",
+      "description": "A list of categorized professional skills.",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "categoryTitle": { "type": "STRING", "description": "The title of the skill category (e.g., 'Programming Languages', 'Frameworks', 'Tools')." },
+          "skills": {
+            "type": "ARRAY",
+            "items": { "type": "STRING" }
+          }
+        }
+      }
+    },
+    "customSections": {
+      "type": "ARRAY",
+      "description": "A list of custom sections, such as 'Awards' or 'Publications'.",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "title": { "type": "STRING", "description": "The title of the custom section." },
+          "text": { "type": "STRING", "description": "The content of the custom section." }
+        }
+      }
+    }
+  }
+}
