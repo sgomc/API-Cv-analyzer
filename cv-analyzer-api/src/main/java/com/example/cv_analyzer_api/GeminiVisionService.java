@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
+import java.util.ArrayList; // Make sure to add this import at the top
+import java.util.List;      // Make sure to add this import at the top
 
 @Service
 public class GeminiVisionService {
@@ -83,28 +85,39 @@ public class GeminiVisionService {
         }
     }
 
-    private GeminiRequest buildGeminiRequest(String mimeType, String imageBase64) {
-        // Part 1: System Prompt
-        Content systemInstruction = new Content(Collections.singletonList(new Part(getSystemPrompt())));
 
-        // Part 2: The user's content (the image)
+
+    private GeminiRequest buildGeminiRequest(String mimeType, String imageBase64) {
+        // --- CONSOLIDATED CONTENT ---
+        // We will now create a single list of "parts" for the main content.
+        // This is the most standard way to send a multimodal request.
+
+        // Part 1: The System Prompt as a text part.
+        Part textPart = new Part(getSystemPrompt());
+
+        // Part 2: The Image as an inline data part.
         InlineData inlineData = new InlineData(mimeType, imageBase64);
         Part imagePart = new Part(inlineData);
-        Content userContent = new Content(Collections.singletonList(imagePart));
+        
+        // Create a list containing both the text instructions and the image.
+        List<Part> allParts = new ArrayList<>();
+        allParts.add(textPart);
+        allParts.add(imagePart);
+        
+        Content combinedContent = new Content(allParts);
 
-        // Part 3: The function/tool definition (our schema)
-        Object schema = loadSchemaAsObject(); // Load schema from a file
+        // --- TOOL DEFINITION (This part remains the same) ---
+        Object schema = loadSchemaAsObject();
         FunctionDeclaration functionDeclaration = new FunctionDeclaration("extract_cv_data", "Extracts structured data from a CV.", schema);
         Tool tool = new Tool(Collections.singletonList(functionDeclaration));
         
-        // Part 4: Generation Config
-        //GenerationConfig generationConfig = new GenerationConfig("application/json");
-
+        // --- FINAL REQUEST ---
+        // We pass null for systemInstruction because we've moved the prompt into the main content.
         return new GeminiRequest(
-            Collections.singletonList(userContent),
-            null,
+            Collections.singletonList(combinedContent),
+            null, 
             Collections.singletonList(tool),
-            systemInstruction
+            null // Pass null for systemInstruction
         );
     }
     
