@@ -24,7 +24,6 @@ public class GeminiResponse {
 
     @Data
     public static class Part {
-        @JsonProperty("function_call")
         private FunctionCall functionCall;
     }
 
