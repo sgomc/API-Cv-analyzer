@@ -24,7 +24,7 @@ public class GeminiVisionService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    private String apiModel = "gemini-2.5-flash";
+    private String apiModel = "gemini-pro-vision";
     
     private String apiBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
 
