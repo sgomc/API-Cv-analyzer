@@ -13,7 +13,7 @@ import java.io.IOException;
 @RequestMapping("/api/v1")
 // @CrossOrigin allows requests from other origins (like your frontend running on localhost:3000).
 // This is crucial for development.
-@CrossOrigin(origins = "https://ai-cv-test-zeta.vercel.app/") // Be more specific in production!
+@CrossOrigin(origins = "https://ai-cv-test-zeta.vercel.app") // Be more specific in production!
 public class CvAnalyzerController {
 
     // We need an instance of our service to do the actual work.
