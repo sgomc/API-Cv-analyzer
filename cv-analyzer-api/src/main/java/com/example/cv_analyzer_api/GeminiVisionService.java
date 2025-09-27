@@ -47,12 +47,13 @@ public class GeminiVisionService {
         GeminiRequest request = buildGeminiRequest(imageFile.getContentType(), imageBase64);
 
         // 3. Make the API call
-        String fullApiUrl = String.format("%s/%s:generateContent?key=%s", apiBaseUrl, apiModel, apiKey);
+        String apiUrl = String.format("%s/%s:generateContent", apiBaseUrl, apiModel);
 
         String responseBody;
         try {
             responseBody = restClient.post()
-                    .uri(fullApiUrl)
+                    .uri(apiUrl) // Use the URL without the API key
+                    .header("x-goog-api-key", this.apiKey) // Add the API key as a header
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(request)
                     .retrieve()
