@@ -24,11 +24,9 @@ public class GeminiVisionService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    @Value("${gemini.api.model}")
-    private String apiModel;
+    private String apiModel = "gemini-1.5-flash-latest";
     
-    @Value("${gemini.api.baseurl}")
-    private String apiBaseUrl;
+    private String apiBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
 
     // Constructor injection for RestClient and ObjectMapper
     public GeminiVisionService(RestClient.Builder restClientBuilder, ObjectMapper objectMapper) {
