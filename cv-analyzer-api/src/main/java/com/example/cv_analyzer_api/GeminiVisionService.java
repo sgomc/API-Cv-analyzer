@@ -98,11 +98,11 @@ public class GeminiVisionService {
         Tool tool = new Tool(Collections.singletonList(functionDeclaration));
         
         // Part 4: Generation Config
-        GenerationConfig generationConfig = new GenerationConfig("application/json");
+        //GenerationConfig generationConfig = new GenerationConfig("application/json");
 
         return new GeminiRequest(
             Collections.singletonList(userContent),
-            generationConfig,
+            null,
             Collections.singletonList(tool),
             systemInstruction
         );
