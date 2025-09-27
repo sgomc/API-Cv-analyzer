@@ -24,7 +24,7 @@ public class GeminiVisionService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    private String apiModel = "gemini-pro-vision";
+    private String apiModel = "gemini-2.5-flash";
     
     private String apiBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
 
@@ -60,7 +60,7 @@ public class GeminiVisionService {
                     .body(String.class);
         } catch (Exception e) {
             // Log the actual error for debugging
-            System.err.println("Error calling Gemini API: " + e.getMessage());
+            System.err.println("Error calling Gemini API: " +apiUrl+"\n"+ e.getMessage());
             throw new RuntimeException("An error occurred while communicating with the AI service.", e);
         }
 
